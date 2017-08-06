@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MixMax Max</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Mixmax SDK -->
+	<script defer src="https://d1xa36cy0xt122.cloudfront.net/v1/Mixmax.js"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.3.2/sweetalert2.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.3.2/sweetalert2.min.js"></script>
+
+	<!--ProgressJS-->
+	<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+
+	<!--Stylesheet-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+</head>
+<body>
+	<nav class="navbar header navbar-default " style="border-radius:0px; height:90px; margin-bottom: 0px;">
+
+		<div class="container">
+
+
+			<div class="navbar-brand">
+
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav " style="text-align:center; margin-top:40px;">
+
+					<li><p style="font-size:  30px; margin-top: -15px; color:white; font-weight: 100;"><strong>MixMax</strong>Mix</p></li> 
+
+				</ul>
+
+			</div><!--/.nav-collapse -->
+		</div>
+
+	</nav>
+
+	<script>
+		$(document).ready(function(){
+			$('[data-toggle="popover"]').popover();   
+		});
+		var isMixmax = !!window.opener;
+		if(isMixmax) {
+
+			$(".js-insert").hide();
+			console.log(isMixmax);
+		}
+	</script>
+
+	<div class="container-fluid">
+		<div class="row text-center">
+			<p>Enter your message into the textbox below and hit analyze in order to create a tone summary</p>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label style="font-size: 16px;">Search</label>
+					<form method="post" action="/" class="text-center myForm">
+						<input type="text" class="form-control" name="text" id="email-text" style="height:50px;"><%= text %></input>
+						<br>
+						<input type="submit" value="Search" class="button submit" data-toggle="popover" data-placement="top" data-content="Content"/>
+
+						<input type="button" value="Insert" class="button js-insert" style="margin-top: 10px;" data-toggle="popover" data-placement="top" data-content="Content"/>
+					</form>
+
+				</div>
+			</div>
+			<div class="col-md-6">
+				<label style="font-size: 16px;">Playlist</label>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="popover"]').popover();   
+	});
+</script>
+<script src="script.js"></script>
+<div class="footer">Made with &nbsp;<span><img style="height:15px;margin-bottom:5px;" src="heart.png"></span> &nbsp;and &nbsp; <span><img style="height:17px;margin-bottom:5px;" src="js.png"></span> &nbsp;by Dhruv.</div>
+</body>
+</html>
