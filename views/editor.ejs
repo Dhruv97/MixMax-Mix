@@ -33,17 +33,12 @@
 	<nav class="navbar header navbar-default " style="border-radius:0px; height:90px; margin-bottom: 0px;">
 
 		<div class="container">
-
-
-			<div class="navbar-brand">
-
-			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 
 				<ul class="nav navbar-nav " style="text-align:center; margin-top:40px;">
 
 					<li><p style="font-size:  30px; margin-top: -15px; color:white; font-weight: 100;"><strong>MixMax</strong>Mix</p></li> 
-
+					
 				</ul>
 
 			</div><!--/.nav-collapse -->
@@ -65,7 +60,7 @@
 
 	<div class="container-fluid">
 		<div class="row text-center">
-			<p>Enter your message into the textbox below and hit analyze in order to create a tone summary</p>
+			<p>Search for an artist below to get a Spotify playlist</p>
 		</div>
 		<hr>
 		<div class="row">
@@ -73,18 +68,23 @@
 				<div class="form-group">
 					<label style="font-size: 16px;">Search</label>
 					<form method="post" action="/" class="text-center myForm">
-						<input type="text" class="form-control" name="text" id="email-text" style="height:50px;"><%= text %></input>
+						<textarea class="form-control" name="text" id="email-text" style="height:50px;"><%= text %></textarea>
 						<br>
 						<input type="submit" value="Search" class="button submit" data-toggle="popover" data-placement="top" data-content="Content"/>
 
 						<input type="button" value="Insert" class="button js-insert" style="margin-top: 10px;" data-toggle="popover" data-placement="top" data-content="Content"/>
 					</form>
 
+
 				</div>
 			</div>
 			<div class="col-md-6">
 				<label style="font-size: 16px;">Playlist</label>
-				
+				<div class="row">
+					<div class="col-md-12">
+						<iframe id="playlist" width="300" height="380" frameborder="0" allowtransparency="true" src='<%=id%>'></iframe>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -92,9 +92,21 @@
 <br>
 <br>
 <script>
+	var id = <%=id%>
 	$(document).ready(function(){
 		$('[data-toggle="popover"]').popover();   
 	});
+
+$(() => {
+	$('.js-insert').click((e) => {
+		e.preventDefault();
+
+		Mixmax.done({
+			src: <%=id%>
+		});
+	});
+})
+
 </script>
 <script src="script.js"></script>
 <div class="footer">Made with &nbsp;<span><img style="height:15px;margin-bottom:5px;" src="heart.png"></span> &nbsp;and &nbsp; <span><img style="height:17px;margin-bottom:5px;" src="js.png"></span> &nbsp;by Dhruv.</div>

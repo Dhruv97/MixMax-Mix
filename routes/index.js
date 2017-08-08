@@ -1,28 +1,39 @@
 var express = require('express');
 var router = express.Router();
 var cors = require('cors');
+const util = require('util');
+var jsdom = require('jsdom');
+var $ = null;
 
-//Requires for spell-checker
-var dictionary = require('dictionary-en-us');
-var nspell = require('nspell');
+jsdom.env(
+ "http://localhost:3000/",
+ function (err, window) {
+   $ = require('jquery')(window);
+ }
+);
+var SpotifyWebApi = require('spotify-web-api-node');
 
-/* GET home page. */
-var watson = require('watson-developer-cloud');
-
-var tone_analyzer = new watson.ToneAnalyzerV3({
-    username: '963e8c57-83e1-4d30-9aac-3abc8ead6ad2',
-    password: 'TyizUL7zJIIv',
-    sentences: true,
-    version: 'v3',
-    version_date: '2016-05-19 ',
-    sentences: true
+var spotifyApi = new SpotifyWebApi({
+    clientId : '82addd6a92fd4f47bb4aa641b82b3d93',
+    clientSecret : '30ce371b2c9942a48f8de3a36f9dbc43',
+    redirectUri : 'http://localhost:8888/callback'
 });
+
+// Get an access token and 'save' it using a setter
+spotifyApi.clientCredentialsGrant()
+  .then(function(data) {
+    console.log('The access token is ' + data.body['access_token']);
+    spotifyApi.setAccessToken(data.body['access_token']);
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
 
 router.get('/', function(req, res, next) {
-    res.render('editor', { text: ""});
+    res.render('editor', { text: "", id: ""});
 
 });
 
+let spotifyAPIURL = "https://api.spotify.com/v1/search";
 
 var corsOptions = {
     origin: /^[^.\s]+\.mixmax\.com$/,
@@ -31,19 +42,29 @@ var corsOptions = {
 
 router.post('/resolver', cors(corsOptions), function(req, res, next) {
     var data = JSON.parse(req.body.params);
-    var html = data.text;
+    var html = '<iframe id="playlist" width="300" height="380" frameborder="0" allowtransparency="true" src="' + data.src + '"></iframe>'
     res.json({
-        body: html,
-        raw: true
+        body: html
     });
 });
 
 
 router.post('/', function(req, res, next) {
-    
-        res.render('editor', { text: req.body.text, emotionArray: emotionArray,languageArray: languageArray, socialArray: socialArray, numMisspelled: numMisspelled,ratio: ratio, numWords: numWords, coeff: coeff, color: color});
-          
+        
+        let text = req.body.text;
+       let artists = text.split(",");
+       spotifyApi.searchPlaylists(artists)
+        .then(function(data) {
+            let first_item = data.body.playlists.items[0];
+            let id = first_item.id;
+            let owner = first_item.owner.id;
+            console.log(first_item);
+            res.render('editor', {text: text, id: `https://open.spotify.com/embed/user/${owner}/playlist/${id}`});
+        }, function(err) {
+            console.log('Something went wrong!', err);
+        });
 
 });
 
 module.exports = router;
+

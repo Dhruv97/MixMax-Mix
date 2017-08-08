@@ -13,10 +13,14 @@
     "dictionary-en-us": "^1.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "jquery": "^3.2.1",
+    "jsdom": "^3.1.2",
     "morgan": "~1.6.1",
     "nodemon": "*",
     "nspell": "^1.0.2",
     "serve-favicon": "~2.3.0",
+    "spotify-web-api-js": "^0.22.0",
+    "spotify-web-api-node": "^2.4.0",
     "watson-developer-cloud": "^2.15.2"
   }
 }

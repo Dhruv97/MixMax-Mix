@@ -2,11 +2,14 @@ $(() => {
 	$('.js-insert').click((e) => {
 		e.preventDefault();
 
+		var frame_src = document.getElementById('playlist').src
+
 		Mixmax.done({
-			text: $('#email-text').val()
-		});
+			src: frame_src
+		});	
 	});
 })
+
 
 
 var isMixmax = !!window.opener;
