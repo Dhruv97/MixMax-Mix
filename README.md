@@ -11,6 +11,8 @@ MixMax Enchancement as a part of MixMax's intern hiring process. Uses Spotify AP
   Name | MixMax Mix
   Icon tooltop | Spotify Search
   Editor URL | https://localhost:8888/
+  Height | 900
+  Width | 1000
   Resolver API URL | https://localhost:8888/resolver
   Activate API URL | *leave blank*
 
